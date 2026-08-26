@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSSN Old Executives — Masjid Contribution Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Masjid Building Fund</h1>
+  <p>MSSN Old Executives — ₦1,000 monthly contribution tracker</p>
+</div>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab hidden" data-view="publicView" id="everyoneTabBtn">Everyone</button>
+    <button class="tab active" data-view="memberView">My status</button>
+    <button class="tab" data-view="adminView">Admin</button>
+  </div>
+
+  <!-- PUBLIC VIEW (admin-only) -->
+  <section id="publicView" class="view">
+    <div class="card">
+      <div class="summary" id="summary"></div>
+      <div class="month-row">
+        <div style="flex:1;">
+          <label for="monthSelect">Month</label>
+          <select id="monthSelect"></select>
+        </div>
+      </div>
+      <div class="search-box">
+        <label for="searchBox">Search a name</label>
+        <input id="searchBox" type="text" placeholder="Type a name…">
+      </div>
+      <div id="memberList"></div>
+    </div>
+  </section>
+
+  <!-- MEMBER SELF-CHECK VIEW -->
+  <section id="memberView" class="view active">
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Check your own record</h3>
+      <label for="memberNameSelect">Your name</label>
+      <select id="memberNameSelect"><option value="">Select your name</option></select>
+      <label for="memberPin">Your PIN</label>
+      <input id="memberPin" type="password" inputmode="numeric" placeholder="PIN given by admin">
+      <div class="error" id="memberError"></div>
+      <button class="primary" id="memberCheckBtn">Check my status</button>
+
+      <div id="memberResult" class="hidden" style="margin-top:18px;">
+        <label>All months</label>
+        <div class="month-grid" id="memberMonthGrid"></div>
+      </div>
+    </div>
+    <p class="small-note">Don't have a PIN? Ask an admin to add you or give you one.</p>
+  </section>
+
+  <!-- ADMIN VIEW -->
+  <section id="adminView" class="view">
+    <div class="card">
+      <form id="adminLoginForm">
+        <h3 style="margin-bottom:14px;">Admin login</h3>
+        <label for="adminEmail">Email</label>
+        <input id="adminEmail" type="email" required>
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword" type="password" required>
+        <div class="error" id="adminError"></div>
+        <button class="primary" type="submit">Log in</button>
+      </form>
+
+      <div id="adminLoggedIn" class="hidden">
+        <h3 style="margin-bottom:6px;">You're logged in as admin</h3>
+        <p class="small-note" style="margin-bottom:16px;">Go to the <b>Everyone</b> tab — each name now has a tap-to-toggle button for the selected month.</p>
+
+        <form id="addMemberForm">
+          <label for="newMemberName">Add a new member — name</label>
+          <input id="newMemberName" type="text" required placeholder="Full name">
+          <label for="newMemberPin">PIN for this member</label>
+          <input id="newMemberPin" type="text" required placeholder="e.g. 1234">
+          <button class="primary" type="submit">Add member</button>
+          <p class="small-note" id="addMemberMsg"></p>
+        </form>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+        <h3 style="margin-bottom:6px;">Bulk add members</h3>
+        <p class="small-note" style="margin-bottom:10px;">One member per line: <code>Name, PIN</code>. If you skip the PIN, it defaults to 0000.</p>
+        <textarea id="bulkNames" rows="6" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg);font-family:inherit;margin-bottom:10px;" placeholder="Ahmad Bello, 1023&#10;Fatima Yusuf, 4471&#10;Ibrahim Sale"></textarea>
+        <button class="primary" id="bulkAddBtn" type="button">Add all</button>
+        <p class="small-note" id="bulkAddMsg"></p>
+
+        <button class="link" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="small-note">MSSN Old Executives &middot; Masjid Building Fund</p>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

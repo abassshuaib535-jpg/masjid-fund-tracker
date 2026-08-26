@@ -208,6 +208,18 @@ onAuthStateChanged(auth, (user) => {
   isAdmin = !!user;
   adminLoginForm.classList.toggle("hidden", isAdmin);
   adminLoggedIn.classList.toggle("hidden", !isAdmin);
+
+  // The full member list is only for admins. Hide that tab entirely
+  // for everyone else, and bounce them off it if they're on it.
+  const everyoneTabBtn = document.getElementById("everyoneTabBtn");
+  everyoneTabBtn.classList.toggle("hidden", !isAdmin);
+  if (!isAdmin && document.getElementById("publicView").classList.contains("active")) {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+    document.querySelector('[data-view="memberView"]').classList.add("active");
+    document.getElementById("memberView").classList.add("active");
+  }
+
   renderPublicList();
 });
 

@@ -18,13 +18,13 @@
 <div class="container">
 
   <div class="tabs">
-    <button class="tab active" data-view="publicView">Everyone</button>
-    <button class="tab" data-view="memberView">My status</button>
+    <button class="tab hidden" data-view="publicView" id="everyoneTabBtn">Everyone</button>
+    <button class="tab active" data-view="memberView">My status</button>
     <button class="tab" data-view="adminView">Admin</button>
   </div>
 
-  <!-- PUBLIC VIEW -->
-  <section id="publicView" class="view active">
+  <!-- PUBLIC VIEW (admin-only) -->
+  <section id="publicView" class="view">
     <div class="card">
       <div class="summary" id="summary"></div>
       <div class="month-row">
@@ -42,7 +42,8 @@
   </section>
 
   <!-- MEMBER SELF-CHECK VIEW -->
-  <section id="memberView" class="view">
+  <section id="memberView" class="view active">
+
     <div class="card">
       <h3 style="margin-bottom:14px;">Check your own record</h3>
       <label for="memberNameSelect">Your name</label>
